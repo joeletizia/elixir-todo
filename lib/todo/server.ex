@@ -20,7 +20,6 @@ defmodule Todo.Server do
 
   def handle_cast({:add_entry, new_entry}, {list_name, todo_list}) do
     new_state = Todo.List.add_entry(todo_list, new_entry)
-    IO.puts "### Storing #{list_name} ###"
     Todo.Database.store(list_name, new_state)
     {:noreply, {list_name, new_state}}
   end
