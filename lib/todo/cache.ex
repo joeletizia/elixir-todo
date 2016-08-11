@@ -13,7 +13,6 @@ defmodule Todo.Cache do
   # Callbacks
 
   def init(_) do
-    Todo.Database.start("./persist/")
     {:ok, %{}}
   end
 
