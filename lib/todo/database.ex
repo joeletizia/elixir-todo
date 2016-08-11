@@ -4,7 +4,8 @@ defmodule Todo.Database do
   @number_of_workers 40
 
   def start(db_folder) do
-    GenServer.start(__MODULE__, db_folder, name: :database_server)
+    IO.puts "Starting Todo.Database"
+    GenServer.start_link(__MODULE__, db_folder, name: :database_server)
   end
 
   def store(key, data) do

@@ -1,6 +1,8 @@
 # Todo
 
-**TODO: Add description**
+A command line todo-list implementation.
+
+The implementation uses the file system for persistence.
 
 ## Installation
 
