@@ -7,7 +7,10 @@ defmodule Todo.Cache do
   end
 
   def server_process(list_name) do
-    GenServer.call(:todo_cache, {:server_process, list_name})
+    case Todo.ProcessRegistry.whereis_name({:todo_server, list_name}) do
+      :undefined -> GenServer.call(:todo_cache, {:server_process, list_name})
+      pid -> pid
+    end
   end
 
   # Callbacks
@@ -27,7 +30,7 @@ defmodule Todo.Cache do
   end
 
   defp start_server(list_name) do
-    {:ok, server} = Todo.Server.start_link(list_name)
+    {:ok, server} = Todo.ServerSupervisor.start_child(list_name)
     server
   end
 end
