@@ -1,4 +1,4 @@
-defmodule Todo.Supervisor do
+defmodule Todo.TodoSupervisor do
   use Supervisor
 
   def start_link do
@@ -7,7 +7,6 @@ defmodule Todo.Supervisor do
 
   def init(_) do
     processes = [
-      worker(Todo.ProcessRegistry, []),
       supervisor(Todo.Database, ["./persist/"]),
       supervisor(Todo.ServerSupervisor, []),
       worker(Todo.Cache, []),
@@ -15,3 +14,4 @@ defmodule Todo.Supervisor do
     supervise(processes, strategy: :one_for_one)
   end
 end
+
